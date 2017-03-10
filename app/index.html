@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="../scripts/angular.min.js"></script>
+<!--    <script src="mainFeature/mainDirective.js"></script>
+    <script src="mainFeature/mainSvc.js"></script> -->
+    <script src="mainFeature/mainCtrl.js"></script>
+    <script src="bootstrapper/bootstrapper.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container" ng-controller="MainCtrl as mc" ng-cloak>
+      {{mc.message}}
+      <br>
+      {{message}}
+      <br>
+      {{task}}
+    <form class="form-inline">
+        <input type="text" class="form-control" ng-model="item.purchase" placeholder="Description..">
+        <input type="number" class="form-control" ng-model="item.price" placeholder="Price.." min="0">
+        <button class="btn btn-info btn-md" ng-click="mc.addItem()"
+                ng-disabled="!item.purchase || !item.price || item < 0">
+          Add Item
+        </button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Bought</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in itemArray track by $index">
+                <td>{{item.purchase}}
+                <button class="btn btn-danger btn-xs" ng-click="mc.deleteItem($index)">Delete</button>
+                </td>
+                <td>{{item.price}}</td>
+                <td><input type="checkbox" ng-model="item.done" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- /.container -->
+<main-Directive></main-Directive>
+</body>
+</html>
